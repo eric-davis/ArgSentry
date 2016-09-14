@@ -8,7 +8,7 @@ namespace ArgSentry
     /// <summary>
     /// This class is a utility that is to be used to help validate method arguments and prevent specific scenarios.
     /// </summary>
-    public static class Prevent
+    public class Prevent
     {
         #region Collections
 

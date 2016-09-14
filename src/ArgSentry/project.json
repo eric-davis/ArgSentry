@@ -1,5 +1,5 @@
 ﻿{
-  "version": "1.0.0-*",
+  "version": "1.0.1-*",
   "frameworks": {
     "netstandard1.5": {
       "imports": "dnxcore50",
@@ -36,7 +36,6 @@
     "iconUrl": "https://raw.githubusercontent.com/eric-davis/ArgSentry/master/ICON.png",
     "licenseUrl": "https://raw.githubusercontent.com/eric-davis/ArgSentry/master/LICENSE",
     "tags": [ "arg", "sentry", "prevent", "argument", "parameter", "validation" ],
-    "releaseNotes": "Initial commit."
+    "releaseNotes": "Changed Prevent class from static to non-static."
   }
-
 }
