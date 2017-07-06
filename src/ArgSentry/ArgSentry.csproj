@@ -5,7 +5,9 @@
     <PackageReleaseNotes>Updated target frameworks and removed expression-based methods.</PackageReleaseNotes>
     <TargetFrameworks>netstandard1.3;netstandard1.6;</TargetFrameworks>
     <RuntimeFrameworkVersion>1.1.2</RuntimeFrameworkVersion>
+    <Title>ArgSentry</Title>
     <Description>ArgSentry is a utility class for validating method argument values.</Description>
+    <Summary>ArgSentry is a utility class for validating method argument values.</Summary>
     <Copyright>2017 Eric S. Davis</Copyright>
     <AssemblyTitle>ArgSentry</AssemblyTitle>
     <Authors>Eric S. Davis</Authors>
