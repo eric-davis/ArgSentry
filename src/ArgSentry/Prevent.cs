@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq.Expressions;
 
+// ReSharper disable UnusedParameter.Global
+// ReSharper disable UnusedMember.Global
 namespace ArgSentry
 {
     /// <summary>
@@ -11,32 +12,6 @@ namespace ArgSentry
     public class Prevent
     {
         #region Collections
-
-        /// <summary>
-        /// Ensures that all collection values are not less than or equal to a specified value.
-        /// </summary>
-        /// <typeparam name="TCollection">
-        /// The collection type.
-        /// </typeparam>
-        /// <typeparam name="TValue">
-        /// The collection item value type.
-        /// </typeparam>
-        /// <param name="arg">
-        /// The argument expression.
-        /// </param>
-        /// <param name="mustBeGreaterThan">
-        /// The "must be after" value.
-        /// </param>
-        /// <exception cref="ArgumentOutOfRangeException">
-        /// if any collection value is less than or equal to the specified value.
-        /// </exception>
-        public static void CollectionWithAnyValuesLessThanOrEqualTo<TCollection, TValue>(
-            Expression<Func<TCollection>> arg,
-            TValue mustBeGreaterThan) where TCollection : ICollection<TValue> where TValue : IComparable, IComparable<TValue>
-        {
-            var info = MemberInfo<TCollection>.GetMemberInfo(arg);
-            CollectionWithAnyValuesLessThanOrEqualTo(info.MemberValue, mustBeGreaterThan, info.MemberName);
-        }
 
         /// <summary>
         /// Ensures that all collection values are not less than or equal to a specified value.
@@ -86,25 +61,6 @@ namespace ArgSentry
         /// <summary>
         /// Ensures that an enumerable argument is not null or empty.
         /// </summary>
-        /// <param name="arg">
-        /// The argument expression.
-        /// </param>
-        /// <typeparam name="TCollection">
-        /// The argument type.
-        /// </typeparam>
-        /// <exception cref="ArgumentNullException">
-        /// if the argument value is null or empty.
-        /// </exception>
-        public static void NullOrEmptyCollection<TCollection>(Expression<Func<TCollection>> arg)
-            where TCollection : ICollection
-        {
-            var info = MemberInfo<TCollection>.GetMemberInfo(arg);
-            NullOrEmptyCollection(info.MemberValue, info.MemberName);
-        }
-
-        /// <summary>
-        /// Ensures that an enumerable argument is not null or empty.
-        /// </summary>
         /// <param name="collection">
         /// The collection.
         /// </param>
@@ -126,27 +82,36 @@ namespace ArgSentry
             }
         }
 
+        /// <summary>
+        /// The null or empty collection.
+        /// </summary>
+        /// <param name="collection">
+        /// The collection.
+        /// </param>
+        /// <param name="paramName">
+        /// The parameter name.
+        /// </param>
+        /// <typeparam name="TCollection">
+        /// The read-only collection type.
+        /// </typeparam>
+        /// <typeparam name="T">
+        /// The collection item type.
+        /// </typeparam>
+        /// <exception cref="ArgumentException">
+        /// if the argument value is null or empty.
+        /// </exception>
+        public static void NullOrEmptyReadOnlyCollection<TCollection, T>(TCollection collection, string paramName)
+            where TCollection : IReadOnlyCollection<T>
+        {
+            if (collection == null || collection.Count <= 0)
+            {
+                throw new ArgumentException("Collection cannot be null or empty.", paramName);
+            }
+        }
+
         #endregion
 
         #region NullObject
-
-        /// <summary>
-        /// Ensures that an object is not null.
-        /// </summary>
-        /// <typeparam name="T">
-        /// The argument type.
-        /// </typeparam>
-        /// <param name="arg">
-        /// The argument expression.
-        /// </param>
-        /// <exception cref="ArgumentNullException">
-        /// if argument value is null.
-        /// </exception>
-        public static void NullObject<T>(Expression<Func<T>> arg) where T : class
-        {
-            var info = MemberInfo<T>.GetMemberInfo(arg);
-            NullObject(info.MemberValue, info.MemberName);
-        }
 
         /// <summary>
         /// Ensures that an object is not null.
@@ -178,21 +143,6 @@ namespace ArgSentry
         /// <summary>
         /// Ensures that a string is not null or empty.
         /// </summary>
-        /// <param name="arg">
-        /// The argument.
-        /// </param>
-        /// <exception cref="ArgumentException">
-        /// if the string is null or empty.
-        /// </exception>
-        public static void NullOrEmptyString(Expression<Func<string>> arg)
-        {
-            var info = MemberInfo<string>.GetMemberInfo(arg);
-            NullOrEmptyString(info.MemberValue, info.MemberName);
-        }
-
-        /// <summary>
-        /// Ensures that a string is not null or empty.
-        /// </summary>
         /// <param name="value">
         /// The value.
         /// </param>
@@ -206,23 +156,8 @@ namespace ArgSentry
         {
             if (string.IsNullOrEmpty(value))
             {
-                throw new ArgumentException($"Value cannot be null or empty.", paramName);
+                throw new ArgumentException("Value cannot be null or empty.", paramName);
             }
-        }
-
-        /// <summary>
-        /// Ensures that a string is not null or white space.
-        /// </summary>
-        /// <param name="arg">
-        /// The argument expression.
-        /// </param>
-        /// <exception cref="ArgumentException">
-        /// if the string is null or white space.
-        /// </exception>
-        public static void NullOrWhiteSpaceString(Expression<Func<string>> arg)
-        {
-            var info = MemberInfo<string>.GetMemberInfo(arg);
-            NullOrWhiteSpaceString(info.MemberValue, info.MemberName);
         }
 
         /// <summary>
@@ -255,28 +190,6 @@ namespace ArgSentry
         /// <typeparam name="T">
         /// The argument type.
         /// </typeparam>
-        /// <param name="arg">
-        /// The argument.
-        /// </param>
-        /// <param name="mustBeLessThanOrEqualTo">
-        /// The value the argument value must be less than or equal to.
-        /// </param>
-        /// <exception cref="ArgumentOutOfRangeException">
-        /// if the value is greater than the mustBeLessThanOrEqualTo value.
-        /// </exception>
-        public static void ValueGreaterThan<T>(Expression<Func<T>> arg, T mustBeLessThanOrEqualTo)
-            where T : struct, IComparable, IComparable<T>
-        {
-            var info = MemberInfo<T>.GetMemberInfo(arg);
-            ValueGreaterThan(info.MemberValue, mustBeLessThanOrEqualTo, info.MemberName);
-        }
-
-        /// <summary>
-        /// Ensures that an argument value is not greater than a specified value.
-        /// </summary>
-        /// <typeparam name="T">
-        /// The argument type.
-        /// </typeparam>
         /// <param name="value">
         /// The value.
         /// </param>
@@ -296,28 +209,6 @@ namespace ArgSentry
             {
                 throw new ArgumentOutOfRangeException(paramName, $"Value must be less than or equal to {mustBeLessThanOrEqualTo}.");
             }
-        }
-
-        /// <summary>
-        /// Ensures that an argument value is not greater than or equal to a specified value.
-        /// </summary>
-        /// <typeparam name="T">
-        /// The argument type.
-        /// </typeparam>
-        /// <param name="arg">
-        /// The argument.
-        /// </param>
-        /// <param name="mustBeLessThan">
-        /// The value the argument value must be less than.
-        /// </param>
-        /// <exception cref="ArgumentOutOfRangeException">
-        /// if the value is greater than or equal to the mustBeLessThan value.
-        /// </exception>
-        public static void ValueGreaterThanOrEqualTo<T>(Expression<Func<T>> arg, T mustBeLessThan)
-            where T : struct, IComparable, IComparable<T>
-        {
-            var info = MemberInfo<T>.GetMemberInfo(arg);
-            ValueGreaterThanOrEqualTo(info.MemberValue, mustBeLessThan, info.MemberName);
         }
 
         /// <summary>
@@ -357,28 +248,6 @@ namespace ArgSentry
         /// <typeparam name="T">
         /// The argument type.
         /// </typeparam>
-        /// <param name="arg">
-        /// The argument.
-        /// </param>
-        /// <param name="mustBeGreaterThanOrEqualTo">
-        /// The value the argument value must be greater than or equal to.
-        /// </param>
-        /// <exception cref="ArgumentOutOfRangeException">
-        /// if the value is less than the mustBeGreaterThanOrEqualTo value.
-        /// </exception>
-        public static void ValueLessThan<T>(Expression<Func<T>> arg, T mustBeGreaterThanOrEqualTo)
-            where T : struct, IComparable, IComparable<T>
-        {
-            var info = MemberInfo<T>.GetMemberInfo(arg);
-            ValueLessThan(info.MemberValue, mustBeGreaterThanOrEqualTo, info.MemberName);
-        }
-
-        /// <summary>
-        /// Ensures that an argument value is not less than a specified value.
-        /// </summary>
-        /// <typeparam name="T">
-        /// The argument type.
-        /// </typeparam>
         /// <param name="value">
         /// The value.
         /// </param>
@@ -398,28 +267,6 @@ namespace ArgSentry
             {
                 throw new ArgumentOutOfRangeException(paramName, $"Value must be greater than or equal to {mustBeGreaterThanOrEqualTo}.");
             }
-        }
-
-        /// <summary>
-        /// Ensures that an argument value is not less than or equal to a specified value.
-        /// </summary>
-        /// <typeparam name="T">
-        /// The argument type.
-        /// </typeparam>
-        /// <param name="arg">
-        /// The argument.
-        /// </param>
-        /// <param name="mustBeGreaterThan">
-        /// The value the argument value must be greater than.
-        /// </param>
-        /// <exception cref="ArgumentOutOfRangeException">
-        /// if argument value less than or equal to the mustBeGreaterThan value.
-        /// </exception>
-        public static void ValueLessThanOrEqualTo<T>(Expression<Func<T>> arg, T mustBeGreaterThan)
-            where T : struct, IComparable, IComparable<T>
-        {
-            var info = MemberInfo<T>.GetMemberInfo(arg);
-            ValueLessThanOrEqualTo(info.MemberValue, mustBeGreaterThan, info.MemberName);
         }
 
         /// <summary>
@@ -457,31 +304,6 @@ namespace ArgSentry
         /// Ensures that an argument value is not outside the specified range.
         /// </summary>
         /// <typeparam name="T">
-        /// The argument type.
-        /// </typeparam>
-        /// <param name="arg">
-        /// The argument expression.
-        /// </param>
-        /// <param name="rangeStart">
-        /// The range start.
-        /// </param>
-        /// <param name="rangeEnd">
-        /// The range end.
-        /// </param>
-        /// <exception cref="ArgumentOutOfRangeException">
-        /// if value is outside the specified range.
-        /// </exception>
-        public static void ValueOutsideOfRange<T>(Expression<Func<T>> arg, T rangeStart, T rangeEnd)
-            where T : IComparable, IComparable<T>
-        {
-            var info = MemberInfo<T>.GetMemberInfo(arg);
-            ValueOutsideOfRange(info.MemberValue, rangeStart, rangeEnd, info.MemberName);
-        }
-
-        /// <summary>
-        /// Ensures that an argument value is not outside the specified range.
-        /// </summary>
-        /// <typeparam name="T">
         /// The value type.
         /// </typeparam>
         /// <param name="value">
@@ -511,21 +333,6 @@ namespace ArgSentry
         #endregion
 
         #region Guids
-
-        /// <summary>
-        /// Ensures that a Guid value has been initialized.
-        /// </summary>
-        /// <param name="arg">
-        /// The argument expression.
-        /// </param>
-        /// <exception cref="ArgumentException">
-        /// if Guid value has not be initialized.
-        /// </exception>
-        public static void EmptyGuid(Expression<Func<Guid>> arg)
-        {
-            var info = MemberInfo<Guid>.GetMemberInfo(arg);
-            EmptyGuid(info.MemberValue, info.MemberName);
-        }
 
         /// <summary>
         /// Ensures that a Guid value has been initialized.
