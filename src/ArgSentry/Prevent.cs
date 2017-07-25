@@ -9,7 +9,7 @@ namespace ArgSentry
     /// <summary>
     /// This class is a utility that is to be used to help validate method arguments and prevent specific scenarios.
     /// </summary>
-    public class Prevent
+    public static class Prevent
     {
         #region Collections
 
@@ -91,17 +91,13 @@ namespace ArgSentry
         /// <param name="paramName">
         /// The parameter name.
         /// </param>
-        /// <typeparam name="TCollection">
-        /// The read-only collection type.
-        /// </typeparam>
         /// <typeparam name="T">
         /// The collection item type.
         /// </typeparam>
         /// <exception cref="ArgumentException">
         /// if the argument value is null or empty.
         /// </exception>
-        public static void NullOrEmptyReadOnlyCollection<TCollection, T>(TCollection collection, string paramName)
-            where TCollection : IReadOnlyCollection<T>
+        public static void NullOrEmptyReadOnlyCollection<T>(IReadOnlyCollection<T> collection, string paramName)
         {
             if (collection == null || collection.Count <= 0)
             {
