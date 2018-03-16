@@ -1,4 +1,4 @@
 ArgSentry
 =======================
 
-ArgSentry is a utility class for validating method argument values.
+ArgSentry is a .NET / .NET Core utility library for validating method argument values.
