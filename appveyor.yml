@@ -23,7 +23,7 @@ before_build:
 build:
   verbosity: normal
 after_build:
-  - cmd: dotnet pack
+  - cmd: dotnet pack ./ArgSentry.csproj --no-build --configuration Release 
 deploy:
 - provider: NuGet
   api_key:
