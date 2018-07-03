@@ -137,6 +137,26 @@ namespace ArgSentry
         #region Strings
 
         /// <summary>
+        /// Ensures that a string is not empty or whitespace.
+        /// </summary>
+        /// <param name="value">
+        /// The value.
+        /// </param>
+        /// <param name="paramName">
+        /// The parameter name.
+        /// </param>
+        /// <exception cref="ArgumentException">
+        /// if the string is empty or white space.
+        /// </exception>
+        public static void EmptyOrWhiteSpaceString(string value, string paramName)
+        {
+            if (value != null && string.IsNullOrWhiteSpace(value))
+            {
+                throw new ArgumentException("Value cannot be empty or white space.", paramName);
+            }
+        }
+
+        /// <summary>
         /// Ensures that a string is not null or empty.
         /// </summary>
         /// <param name="value">
