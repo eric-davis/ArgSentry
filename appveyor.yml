@@ -1,5 +1,16 @@
 version: 2.0.{build}
 image: Visual Studio 2017
+branches:
+  only:
+  - master
+init:
+  # Good practice, because Windows
+  -cmd: git config --global core.autocrlf true
+install:
+  # Install repo-specific stuff here...
+before_build:
+  - cmd: dotnet --version
+  - cmd: dotnet restore
 build:
   verbosity: minimal
 deploy:
