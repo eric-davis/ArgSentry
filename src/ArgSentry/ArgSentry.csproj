@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <VersionPrefix>2.0.1</VersionPrefix>
+    <Version>1.0.0</Version>
     <PackageReleaseNotes>Updated target frameworks.</PackageReleaseNotes>
 
     <TargetFrameworks>
