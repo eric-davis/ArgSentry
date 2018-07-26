@@ -37,7 +37,7 @@ test_script:
 - cmd: codecov -f "./test/ArgSentry.Test/coverage.opencover.xml"
 
 after_test:
-- cmd: dotnet pack ./src/ArgSentry/ArgSentry.csproj --configuration Release --no-build --no-restore --output ./dist
+- cmd: dotnet pack ./src/ArgSentry/ArgSentry.csproj --configuration Release --no-build --no-restore --output ../../dist
 
 artifacts:
 - path: './dist/*.nupkg'
