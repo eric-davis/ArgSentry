@@ -26,6 +26,7 @@ dotnet_csproj:
 before_build:
 - cmd: dotnet --version
 - cmd: dotnet restore
+- cmd: choco install codecov
 
 build:
   publish_nuget: true
@@ -34,7 +35,7 @@ build:
 
 test_script:
 - cmd: dotnet test /p:CollectCoverage=true ./test/ArgSentry.Test/ArgSentry.Test.csproj --logger AppVeyor
-- cmd: bash <(curl -s https://codecov.io/bash)
+- cmd: codecov -f "./test/ArgSentry.Test/coverage.json"
 
 artifacts:
 - path: '**\*.nupkg'
