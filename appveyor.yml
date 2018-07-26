@@ -1,16 +1,19 @@
-image: Visual Studio 2017
-version: 2.1.{build}
-configuration: Release
+version: 2.1.18.{build}
+
+pull_requests:
+
+  do_not_increment_build_number: true
+
 branches:
   only:
   - master
+
+image: Visual Studio 2017
+configuration: Release
+
 init:
-  # Good practice, because Windows
-  -cmd: git config --global core.autocrlf true
-install:
-  # Install repo-specific stuff here...
-pull_requests:
-  do_not_increment_build_number: true
+- -cmd: git config --global core.autocrlf true
+
 dotnet_csproj:
   patch: true
   file: '**\*.csproj'
@@ -19,16 +22,23 @@ dotnet_csproj:
   assembly_version: '{version}'
   file_version: '{version}'
   informational_version: '{version}'
+
 before_build:
-  - cmd: dotnet --version
-  - cmd: dotnet restore
+- cmd: choco install codecov
+- cmd: dotnet restore
+
 build:
   publish_nuget: true
   publish_nuget_symbols: true
   verbosity: minimal
+
+test_script:
+- cmd: dotnet test /p:CollectCoverage=true /p:CoverletOutputFormat=opencover ./test/ArgSentry.Test/ArgSentry.Test.csproj --logger AppVeyor
+- cmd: codecov -f "./test/ArgSentry.Test/coverage.opencover.xml"
+
 artifacts:
-  # push all *.nupkg files in build directory recursively
-  - path: '**\*.nupkg'
+- path: '**\*.nupkg'
+
 deploy:
 - provider: NuGet
   api_key:
