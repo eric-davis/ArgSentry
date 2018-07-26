@@ -34,8 +34,8 @@ build:
   verbosity: minimal
 
 test_script:
-- cmd: dotnet test /p:CollectCoverage=true ./test/ArgSentry.Test/ArgSentry.Test.csproj --logger AppVeyor
-- cmd: codecov -f "./test/ArgSentry.Test/coverage.json"
+- cmd: dotnet test /p:CollectCoverage=true /p:CoverletOutputFormat=opencover ./test/ArgSentry.Test/ArgSentry.Test.csproj --logger AppVeyor
+- cmd: codecov -f "./test/ArgSentry.Test/coverage.xml"
 
 artifacts:
 - path: '**\*.nupkg'
