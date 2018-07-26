@@ -24,9 +24,8 @@ dotnet_csproj:
   informational_version: '{version}'
 
 before_build:
-- cmd: dotnet --version
-- cmd: dotnet restore
 - cmd: choco install codecov
+- cmd: dotnet restore
 
 build:
   publish_nuget: true
