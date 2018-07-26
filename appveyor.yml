@@ -34,7 +34,7 @@ build:
 
 test_script:
 - cmd: dotnet test /p:CollectCoverage=true ./test/ArgSentry.Test/ArgSentry.Test.csproj --logger AppVeyor
-- sh: bash <(curl -s https://codecov.io/bash)
+- cmd: bash <(curl -s https://codecov.io/bash)
 
 artifacts:
 - path: '**\*.nupkg'
