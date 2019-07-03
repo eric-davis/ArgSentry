@@ -1,4 +1,4 @@
-version: 2.1.18.{build}
+version: 2.1.{build}
 
 pull_requests:
 
@@ -12,7 +12,10 @@ image: Visual Studio 2017
 configuration: Release
 
 init:
-- -cmd: git config --global core.autocrlf true
+- cmd: git config --global core.autocrlf true
+
+install:
+- cmd: choco install codecov
 
 dotnet_csproj:
   patch: true
@@ -24,26 +27,26 @@ dotnet_csproj:
   informational_version: '{version}'
 
 before_build:
-- cmd: choco install codecov
 - cmd: dotnet restore
 
-build:
-  publish_nuget: true
-  publish_nuget_symbols: true
-  verbosity: minimal
+build_script:
+- cmd: dotnet build ./src/ArgSentry/ArgSentry.csproj --configuration Release --no-restore
 
 test_script:
 - cmd: dotnet test /p:CollectCoverage=true /p:CoverletOutputFormat=opencover ./test/ArgSentry.Test/ArgSentry.Test.csproj --logger AppVeyor
 - cmd: codecov -f "./test/ArgSentry.Test/coverage.opencover.xml"
 
+after_test:
+- cmd: dotnet pack ./src/ArgSentry/ArgSentry.csproj --configuration Release --no-build --no-restore --output ../../dist
+
 artifacts:
-- path: '**\*.nupkg'
+- path: './dist/*.nupkg'
 
 deploy:
 - provider: NuGet
   api_key:
     secure: 92tF47KjBR7PvZKHSvOyde7y5i17Ciwai1+X4gVtNKqGEK1ZrVl8EHQkatu/BjcH
-  skip_symbols: false
+  skip_symbols: true
   artifact: /.*\.nupkg/
   on:
     branch: master
