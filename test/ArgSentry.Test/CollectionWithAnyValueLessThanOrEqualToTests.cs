@@ -22,7 +22,7 @@ namespace ArgSentry.Test
             Action act = () => Prevent.CollectionWithAnyValuesLessThanOrEqualTo(obj, MustBeGreaterThan, nameof(obj));
 
             // Assert
-            act.ShouldNotThrow();
+            act.Should().NotThrow();
         }
 
         [TestMethod]
@@ -39,7 +39,7 @@ namespace ArgSentry.Test
             Action act = () => Prevent.CollectionWithAnyValuesLessThanOrEqualTo(obj, MustBeGreaterThan, nameof(obj));
 
             // Assert
-            act.ShouldThrow<ArgumentOutOfRangeException>()
+            act.Should().Throw<ArgumentOutOfRangeException>()
                 .WithMessage(expectedMessage)
                 .And.ParamName.Should().Be(nameof(obj));
         }
@@ -58,7 +58,7 @@ namespace ArgSentry.Test
             Action act = () => Prevent.CollectionWithAnyValuesLessThanOrEqualTo(obj, MustBeGreaterThan, nameof(obj));
 
             // Assert
-            act.ShouldThrow<ArgumentOutOfRangeException>()
+            act.Should().Throw<ArgumentOutOfRangeException>()
                 .WithMessage(expectedMessage)
                 .And.ParamName.Should().Be(nameof(obj));
         }
