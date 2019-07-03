@@ -23,7 +23,7 @@ namespace ArgSentry.Test
             Action act = () => Prevent.NullOrEmptyCollection(obj, nameof(obj));
 
             // Assert
-            act.ShouldNotThrow();
+            act.Should().NotThrow();
         }
 
         [TestMethod]
@@ -37,7 +37,7 @@ namespace ArgSentry.Test
             Action act = () => Prevent.NullOrEmptyCollection(obj, nameof(obj));
 
             // Assert
-            act.ShouldThrow<ArgumentException>().WithMessage(expectedMessage).And.ParamName.Should().Be(nameof(obj));
+            act.Should().Throw<ArgumentException>().WithMessage(expectedMessage).And.ParamName.Should().Be(nameof(obj));
         }
 
         [TestMethod]
@@ -51,7 +51,7 @@ namespace ArgSentry.Test
             Action act = () => Prevent.NullOrEmptyCollection(obj, nameof(obj));
 
             // Assert
-            act.ShouldThrow<ArgumentException>().WithMessage(expectedMessage).And.ParamName.Should().Be(nameof(obj));
+            act.Should().Throw<ArgumentException>().WithMessage(expectedMessage).And.ParamName.Should().Be(nameof(obj));
         }
     }
 }

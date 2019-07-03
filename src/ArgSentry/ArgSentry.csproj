@@ -25,7 +25,7 @@
     <PackageId>ArgSentry</PackageId>
     <PackageTags>arg;sentry;prevent;argument;parameter;validation</PackageTags>
     <PackageIconUrl>https://raw.githubusercontent.com/eric-davis/ArgSentry/master/ICON.png</PackageIconUrl>
-    <PackageLicenseUrl>https://raw.githubusercontent.com/eric-davis/ArgSentry/master/LICENSE</PackageLicenseUrl>
+    <PackageLicense>https://raw.githubusercontent.com/eric-davis/ArgSentry/master/LICENSE</PackageLicense>
     <RepositoryType>git</RepositoryType>
     <RepositoryUrl>https://github.com/eric-davis/ArgSentry.git</RepositoryUrl>
     
