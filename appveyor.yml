@@ -29,11 +29,9 @@ install:
 dotnet_csproj:
   patch: true
   file: '**\*.csproj'
-  version: '{version}'
-  package_version: '{version}'
-  assembly_version: '{version}'
-  file_version: '{version}'
-  informational_version: '{version}'
+  assembly_version: '$(VERSION_BUILD)'
+  file_version: '$(VERSION_BUILD)'
+  informational_version: '$(VERSION_BUILD)'
 
 before_build:
 - cmd: dotnet restore
@@ -63,3 +61,12 @@ deploy:
   api_key:
     secure: iYhWvqbiPhHCFRcmePLTAMpsVobVaCO6DpXflc1T9pHRDd/B5HwCin5Vas2AT8+q
   skip_symbols: true
+  on:
+    branch: dev
+
+- provider: NuGet
+  api_key:
+    secure: iYhWvqbiPhHCFRcmePLTAMpsVobVaCO6DpXflc1T9pHRDd/B5HwCin5Vas2AT8+q
+  skip_symbols: true
+  on:
+    branch: master
