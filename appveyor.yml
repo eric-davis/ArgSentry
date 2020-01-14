@@ -48,11 +48,13 @@ test_script:
 after_test:
 - ps: >-
     $branch = $env:APPVEYOR_REPO_BRANCH;
+    Write-Host "branch = $branch"
     if ($branch -eq 'dev') {
       $suffix = "beta" + ([int]$env:APPVEYOR_BUILD_NUMBER).ToString("0000");
-      dotnet pack ./src/ArgSentry/ArgSentry.csproj --configuration Release --no-build --no-restore --output dist /p:VersionPrefix=$env:VERSION_MINOR --version-suffix $suffix
+      Write-Host "suffix = $suffix"
+      #dotnet pack ./src/ArgSentry/ArgSentry.csproj --configuration Release --no-build --no-restore --output dist /p:VersionPrefix=$env:VERSION_MINOR --version-suffix $suffix
     } elseif ($branch -eq 'master') {
-      dotnet pack ./src/ArgSentry/ArgSentry.csproj --configuration Release --no-build --no-restore --output dist /p:VersionPrefix=$env:VERSION_MINOR
+      #dotnet pack ./src/ArgSentry/ArgSentry.csproj --configuration Release --no-build --no-restore --output dist /p:VersionPrefix=$env:VERSION_MINOR
     }
 
 artifacts:
