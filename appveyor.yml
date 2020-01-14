@@ -1,21 +1,30 @@
-version: 2.1.{build}
+environment:
+  VERSION_MINOR: 2.2.0
+  VERSION_BUILD: $(VERSION_MINOR).$(APPVEYOR_BUILD_NUMBER)
+
+version: $(VERSION_MINOR).{build}
 
 pull_requests:
-
   do_not_increment_build_number: true
 
 branches:
   only:
+  - dev
   - master
 
-image: Visual Studio 2017
+skip_commits:
+  files:
+    - '**/.git*'
+    - '**/*.MD'
+
+image: Visual Studio 2019
 configuration: Release
 
 init:
 - cmd: git config --global core.autocrlf true
 
 install:
-- cmd: choco install codecov
+- cmd: choco install codecov --no-progress
 
 dotnet_csproj:
   patch: true
@@ -37,16 +46,20 @@ test_script:
 - cmd: codecov -f "./test/ArgSentry.Test/coverage.opencover.xml"
 
 after_test:
-- cmd: dotnet pack ./src/ArgSentry/ArgSentry.csproj --configuration Release --no-build --no-restore --output ../../dist
+- ps: >-
+    $branch = $env:APPVEYOR_REPO_BRANCH;
+    if ($branch -eq 'dev') {
+      $suffix = "beta" + ([int]$env:APPVEYOR_BUILD_NUMBER).ToString("0000");
+      dotnet pack ./src/ArgSentry/ArgSentry.csproj --configuration Release --no-build --no-restore --output dist /p:VersionPrefix=$env:VERSION_MINOR --version-suffix $suffix
+    } elseif ($branch -eq 'master') {
+      dotnet pack ./src/ArgSentry/ArgSentry.csproj --configuration Release --no-build --no-restore --output dist /p:VersionPrefix=$env:VERSION_MINOR
+    }
 
 artifacts:
-- path: './dist/*.nupkg'
+- path: '**\*.nupkg'
 
 deploy:
 - provider: NuGet
   api_key:
     secure: iYhWvqbiPhHCFRcmePLTAMpsVobVaCO6DpXflc1T9pHRDd/B5HwCin5Vas2AT8+q
   skip_symbols: true
-  artifact: /.*\.nupkg/
-  on:
-    branch: master

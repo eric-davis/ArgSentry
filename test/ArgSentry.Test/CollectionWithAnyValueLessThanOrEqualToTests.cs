@@ -33,7 +33,7 @@ namespace ArgSentry.Test
             var obj = new[] { 1, 2, 3, 4, 5, 6 };
 
             var expectedMessage =
-                $"All collection values must be greater than {MustBeGreaterThan}.\r\nParameter name: {nameof(obj)}";
+                $"All collection values must be greater than {MustBeGreaterThan}. (Parameter '{nameof(obj)}')";
 
             // Act
             Action act = () => Prevent.CollectionWithAnyValuesLessThanOrEqualTo(obj, MustBeGreaterThan, nameof(obj));
@@ -52,7 +52,7 @@ namespace ArgSentry.Test
             var obj = new[] { 1, 2, 3, 4, 5, 6 };
 
             var expectedMessage =
-                $"All collection values must be greater than {MustBeGreaterThan}.\r\nParameter name: {nameof(obj)}";
+                $"All collection values must be greater than {MustBeGreaterThan}. (Parameter '{nameof(obj)}')";
 
             // Act
             Action act = () => Prevent.CollectionWithAnyValuesLessThanOrEqualTo(obj, MustBeGreaterThan, nameof(obj));

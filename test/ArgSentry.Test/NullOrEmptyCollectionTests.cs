@@ -31,7 +31,7 @@ namespace ArgSentry.Test
         {
             // Arrange
             List<string> obj = null;
-            var expectedMessage = $"Collection cannot be null or empty.\r\nParameter name: {nameof(obj)}";
+            var expectedMessage = $"Collection cannot be null or empty. (Parameter '{nameof(obj)}')";
 
             // Act
             Action act = () => Prevent.NullOrEmptyCollection(obj, nameof(obj));
@@ -45,7 +45,7 @@ namespace ArgSentry.Test
         {
             // Arrange
             var obj = new List<string>();
-            var expectedMessage = $"Collection cannot be null or empty.\r\nParameter name: {nameof(obj)}";
+            var expectedMessage = $"Collection cannot be null or empty. (Parameter '{nameof(obj)}')";
 
             // Act
             Action act = () => Prevent.NullOrEmptyCollection(obj, nameof(obj));
