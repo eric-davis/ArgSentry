@@ -17,14 +17,14 @@ skip_commits:
     - '**/.git*'
     - '**/*.MD'
 
-image: Visual Studio 2017
+image: Visual Studio 2019
 configuration: Release
 
 init:
 - cmd: git config --global core.autocrlf true
 
 install:
-- cmd: choco install codecov
+- cmd: choco install codecov --no-progress
 
 dotnet_csproj:
   patch: true
