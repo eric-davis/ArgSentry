@@ -1,12 +1,21 @@
-version: 2.2.{build}
+environment:
+  VERSION_MINOR: 2.2.0
+  VERSION_BUILD: $(VERSION_MINOR).$(APPVEYOR_BUILD_NUMBER)
+
+version: $(VERSION_MINOR).{build}
 
 pull_requests:
-
   do_not_increment_build_number: true
 
 branches:
   only:
+  - dev
   - master
+
+skip_commits:
+  files:
+    - '**/.git*'
+    - '**/*.MD'
 
 image: Visual Studio 2017
 configuration: Release
@@ -37,7 +46,14 @@ test_script:
 - cmd: codecov -f "./test/ArgSentry.Test/coverage.opencover.xml"
 
 after_test:
-- cmd: dotnet pack ./src/ArgSentry/ArgSentry.csproj --configuration Release --no-build --no-restore --output ../../dist
+- ps: >-
+    $branch = $env:APPVEYOR_REPO_BRANCH;
+    if ($branch -eq 'dev') {
+      $suffix = "beta" + ([int]$env:APPVEYOR_BUILD_NUMBER).ToString("0000");
+      dotnet pack $_.Fullname --configuration Release --no-build --no-restore --output ../../dist /p:VersionPrefix=$env:VERSION_MINOR --version-suffix $suffix
+    } elseif ($branch -eq 'master') {
+      dotnet pack $_.Fullname --configuration Release --no-build --no-restore --output ../../dist /p:VersionPrefix=$env:VERSION_MINOR
+    }
 
 artifacts:
 - path: './dist/*.nupkg'
