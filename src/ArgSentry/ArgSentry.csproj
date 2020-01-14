@@ -1,10 +1,12 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
+    <!-- Version value is placeholder. Controlled in appveyor.yml file. -->
     <Version>1.0.0</Version>
-    <PackageReleaseNotes>Updated target frameworks.</PackageReleaseNotes>
+    <PackageReleaseNotes>Updated target frameworks - added .NET Standard 2.1 support.</PackageReleaseNotes>
 
     <TargetFrameworks>
+      netstandard2.1;
       netstandard2.0;
       netstandard1.6;
       netstandard1.5;
@@ -20,11 +22,11 @@
     <AssemblyTitle>ArgSentry</AssemblyTitle>
     <AssemblyName>ArgSentry</AssemblyName>
     <Authors>Eric S. Davis</Authors>
-    <Copyright>2018 Eric S. Davis</Copyright>
+    <Copyright>2019 Eric S. Davis</Copyright>
     
     <PackageId>ArgSentry</PackageId>
     <PackageTags>arg;sentry;prevent;argument;parameter;validation</PackageTags>
-    <PackageIconUrl>https://raw.githubusercontent.com/eric-davis/ArgSentry/master/ICON.png</PackageIconUrl>
+    <PackageIcon>icon.png</PackageIcon>
     <PackageLicense>https://raw.githubusercontent.com/eric-davis/ArgSentry/master/LICENSE</PackageLicense>
     <RepositoryType>git</RepositoryType>
     <RepositoryUrl>https://github.com/eric-davis/ArgSentry.git</RepositoryUrl>
@@ -34,5 +36,9 @@
     <GenerateAssemblyProductAttribute>false</GenerateAssemblyProductAttribute>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="images\icon.png" Pack="true" PackagePath="\" />
+  </ItemGroup>
 
 </Project>
