@@ -52,9 +52,9 @@ after_test:
     if ($branch -eq 'dev') {
       $suffix = "beta" + ([int]$env:APPVEYOR_BUILD_NUMBER).ToString("0000");
       Write-Host "suffix = $suffix";
-      #dotnet pack ./src/ArgSentry/ArgSentry.csproj --configuration Release --no-build --no-restore --output dist /p:VersionPrefix=$env:VERSION_MINOR --version-suffix $suffix
+      dotnet pack ./src/ArgSentry/ArgSentry.csproj --configuration Release --no-build --no-restore --output dist /p:VersionPrefix=$env:VERSION_MINOR --version-suffix $suffix
     } elseif ($branch -eq 'master') {
-      #dotnet pack ./src/ArgSentry/ArgSentry.csproj --configuration Release --no-build --no-restore --output dist /p:VersionPrefix=$env:VERSION_MINOR
+      dotnet pack ./src/ArgSentry/ArgSentry.csproj --configuration Release --no-build --no-restore --output dist /p:VersionPrefix=$env:VERSION_MINOR
     }
 
 artifacts:
@@ -65,3 +65,12 @@ deploy:
   api_key:
     secure: iYhWvqbiPhHCFRcmePLTAMpsVobVaCO6DpXflc1T9pHRDd/B5HwCin5Vas2AT8+q
   skip_symbols: true
+  on:
+    branch: dev
+
+- provider: NuGet
+  api_key:
+    secure: iYhWvqbiPhHCFRcmePLTAMpsVobVaCO6DpXflc1T9pHRDd/B5HwCin5Vas2AT8+q
+  skip_symbols: true
+  on:
+    branch: master
