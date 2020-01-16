@@ -1,10 +1,11 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <Version>1.0.0</Version>
-    <PackageReleaseNotes>Updated target frameworks.</PackageReleaseNotes>
+    <!-- Version value is placeholder. Controlled in appveyor.yml file. -->
+    <PackageReleaseNotes>Updated target frameworks - added .NET Standard 2.1 support.</PackageReleaseNotes>
 
     <TargetFrameworks>
+      netstandard2.1;
       netstandard2.0;
       netstandard1.6;
       netstandard1.5;
@@ -14,17 +15,22 @@
       netstandard1.1
     </TargetFrameworks>
 
+    <!-- These version properties are placeholders. Will be patched by appveyor build process. Manage version in appveyor.yml -->
+    <AssemblyVersion>1.0.0.0</AssemblyVersion>
+    <FileVersion>1.0.0.0</FileVersion>
+    <InformationalVersion>1.0.0.0</InformationalVersion>
+
     <Title>ArgSentry</Title>
     <Description>ArgSentry is a utility class for validating method argument values.</Description>
     <Summary>ArgSentry is a utility class for validating method argument values.</Summary>
     <AssemblyTitle>ArgSentry</AssemblyTitle>
     <AssemblyName>ArgSentry</AssemblyName>
     <Authors>Eric S. Davis</Authors>
-    <Copyright>2018 Eric S. Davis</Copyright>
+    <Copyright>2019 Eric S. Davis</Copyright>
     
     <PackageId>ArgSentry</PackageId>
     <PackageTags>arg;sentry;prevent;argument;parameter;validation</PackageTags>
-    <PackageIconUrl>https://raw.githubusercontent.com/eric-davis/ArgSentry/master/ICON.png</PackageIconUrl>
+    <PackageIcon>icon.png</PackageIcon>
     <PackageLicense>https://raw.githubusercontent.com/eric-davis/ArgSentry/master/LICENSE</PackageLicense>
     <RepositoryType>git</RepositoryType>
     <RepositoryUrl>https://github.com/eric-davis/ArgSentry.git</RepositoryUrl>
@@ -32,7 +38,11 @@
     <GenerateAssemblyConfigurationAttribute>false</GenerateAssemblyConfigurationAttribute>
     <GenerateAssemblyCompanyAttribute>false</GenerateAssemblyCompanyAttribute>
     <GenerateAssemblyProductAttribute>false</GenerateAssemblyProductAttribute>
-    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="images\icon.png" Pack="true" PackagePath="\" />
+  </ItemGroup>
 
 </Project>
