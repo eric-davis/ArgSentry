@@ -59,14 +59,14 @@ artifacts:
 deploy:
 - provider: NuGet
   api_key:
-    secure: iYhWvqbiPhHCFRcmePLTAMpsVobVaCO6DpXflc1T9pHRDd/B5HwCin5Vas2AT8+q
+    secure: eQXgPkmVZ1fMAfJ7YP6+Q2COMqg0Mpm6U5/GpuR96viivtGqszOxOXDhFNe3gnZD
   skip_symbols: true
   on:
     branch: dev
 
 - provider: NuGet
   api_key:
-    secure: iYhWvqbiPhHCFRcmePLTAMpsVobVaCO6DpXflc1T9pHRDd/B5HwCin5Vas2AT8+q
+    secure: eQXgPkmVZ1fMAfJ7YP6+Q2COMqg0Mpm6U5/GpuR96viivtGqszOxOXDhFNe3gnZD
   skip_symbols: true
   on:
     branch: master
