@@ -308,7 +308,7 @@ namespace ArgSentry
         {
             if (value.CompareTo(mustBeGreaterThan) <= 0)
             {
-                throw new ArgumentOutOfRangeException(paramName, $"Value must be greater than {mustBeGreaterThan}");
+                throw new ArgumentOutOfRangeException(paramName, $"Value must be greater than {mustBeGreaterThan}.");
             }
         }
 

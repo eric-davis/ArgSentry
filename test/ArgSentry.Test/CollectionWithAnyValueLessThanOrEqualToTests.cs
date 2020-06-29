@@ -26,6 +26,21 @@ namespace ArgSentry.Test
         }
 
         [TestMethod]
+        public void CollectionWithAnyValuesLessThanOrEqualTo_WhenCollectionIsNull_ShouldNotThrow()
+        {
+            // Arrange
+            const int MustBeGreaterThan = 0;
+            int[] nullCollection = null;
+
+            // Act
+            // ReSharper disable once ExpressionIsAlwaysNull
+            Action act = () => Prevent.CollectionWithAnyValuesLessThanOrEqualTo(nullCollection, MustBeGreaterThan, nameof(nullCollection));
+
+            // Assert
+            act.Should().NotThrow();
+        }
+
+        [TestMethod]
         public void CollectionWithAnyValuesLessThanOrEqualTo_WhenCollectionContainsMinValue_ShouldThrow()
         {
             // Arrange
