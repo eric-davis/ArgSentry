@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <!-- Version value is placeholder. Controlled in appveyor.yml file. -->
-    <PackageReleaseNotes>Updated target frameworks - added .NET Standard 2.1 support.</PackageReleaseNotes>
+    <PackageReleaseNotes>Added DefaultValue method and upgraded dependencies.</PackageReleaseNotes>
 
     <TargetFrameworks>
       netstandard2.1;
@@ -26,7 +26,7 @@
     <AssemblyTitle>ArgSentry</AssemblyTitle>
     <AssemblyName>ArgSentry</AssemblyName>
     <Authors>Eric S. Davis</Authors>
-    <Copyright>2019 Eric S. Davis</Copyright>
+    <Copyright>2021 Eric S. Davis</Copyright>
     
     <PackageId>ArgSentry</PackageId>
     <PackageTags>arg;sentry;prevent;argument;parameter;validation</PackageTags>
