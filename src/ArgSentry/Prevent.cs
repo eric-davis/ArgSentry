@@ -48,7 +48,7 @@ namespace ArgSentry
             {
                 while (enumerator.MoveNext())
                 {
-                    if (enumerator.Current.CompareTo(mustBeGreaterThan) <= 0)
+                    if (enumerator.Current != null && enumerator.Current.CompareTo(mustBeGreaterThan) <= 0)
                     {
                         throw new ArgumentOutOfRangeException(
                                   paramName,
@@ -129,6 +129,33 @@ namespace ArgSentry
             if (obj == null)
             {
                 throw new ArgumentNullException(paramName);
+            }
+        }
+
+        #endregion
+
+        #region Defaults
+
+        /// <summary>
+        /// Ensures that an object is not the default type value.
+        /// </summary>
+        /// <typeparam name="T">
+        /// The argument type.
+        /// </typeparam>
+        /// <param name="obj">
+        /// The object.
+        /// </param>
+        /// <param name="paramName">
+        /// The parameter name.
+        /// </param>
+        /// <exception cref="ArgumentException">
+        /// if argument value is the type default.
+        /// </exception>
+        public static void DefaultValue<T>(T obj, string paramName)
+        {
+            if (EqualityComparer<T>.Default.Equals(obj, default))
+            {
+                throw new ArgumentException("Parameter cannot be default type value.", paramName);
             }
         }
 
@@ -351,7 +378,7 @@ namespace ArgSentry
         #region Guids
 
         /// <summary>
-        /// Ensures that a Guid value has been initialized.
+        /// Ensures that a GUID value has been initialized.
         /// </summary>
         /// <param name="value">
         /// The value.
@@ -360,7 +387,7 @@ namespace ArgSentry
         /// The parameter name.
         /// </param>
         /// <exception cref="ArgumentException">
-        /// if Guid value has not be initialized.
+        /// if GUID value has not been initialized.
         /// </exception>
         public static void EmptyGuid(Guid value, string paramName)
         {
