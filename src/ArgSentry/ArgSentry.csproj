@@ -29,6 +29,7 @@
 
 		<PackageId>ArgSentry</PackageId>
 		<PackageTags>arg;sentry;prevent;argument;parameter;validation</PackageTags>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
 		<PackageIcon>icon.png</PackageIcon>
 
 		<PackageLicenseExpression>MIT</PackageLicenseExpression>
