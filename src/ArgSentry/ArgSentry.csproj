@@ -1,48 +1,51 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <!-- Version value is placeholder. Controlled in appveyor.yml file. -->
-    <PackageReleaseNotes>Added DefaultValue method and upgraded dependencies.</PackageReleaseNotes>
+	<PropertyGroup>
+		<PackageReleaseNotes>Updated NuGet package licensing metadata and included README doc.</PackageReleaseNotes>
 
-    <TargetFrameworks>
-      netstandard2.1;
-      netstandard2.0;
-      netstandard1.6;
-      netstandard1.5;
-      netstandard1.4;
-      netstandard1.3;
-      netstandard1.2;
-      netstandard1.1
-    </TargetFrameworks>
+		<TargetFrameworks>
+			netstandard2.1;
+			netstandard2.0;
+			netstandard1.6;
+			netstandard1.5;
+			netstandard1.4;
+			netstandard1.3;
+			netstandard1.2;
+			netstandard1.1
+		</TargetFrameworks>
 
-    <!-- These version properties are placeholders. Will be patched by appveyor build process. Manage version in appveyor.yml -->
-    <AssemblyVersion>1.0.0.0</AssemblyVersion>
-    <FileVersion>1.0.0.0</FileVersion>
-    <InformationalVersion>1.0.0.0</InformationalVersion>
+		<!-- These version properties are placeholders. Will be patched by appveyor build process. Manage version in appveyor.yml -->
+		<AssemblyVersion>1.0.0.0</AssemblyVersion>
+		<FileVersion>1.0.0.0</FileVersion>
+		<InformationalVersion>1.0.0.0</InformationalVersion>
 
-    <Title>ArgSentry</Title>
-    <Description>ArgSentry is a utility class for validating method argument values.</Description>
-    <Summary>ArgSentry is a utility class for validating method argument values.</Summary>
-    <AssemblyTitle>ArgSentry</AssemblyTitle>
-    <AssemblyName>ArgSentry</AssemblyName>
-    <Authors>Eric S. Davis</Authors>
-    <Copyright>2021 Eric S. Davis</Copyright>
-    
-    <PackageId>ArgSentry</PackageId>
-    <PackageTags>arg;sentry;prevent;argument;parameter;validation</PackageTags>
-    <PackageIcon>icon.png</PackageIcon>
-    <PackageLicense>https://raw.githubusercontent.com/eric-davis/ArgSentry/master/LICENSE</PackageLicense>
-    <RepositoryType>git</RepositoryType>
-    <RepositoryUrl>https://github.com/eric-davis/ArgSentry.git</RepositoryUrl>
-    
-    <GenerateAssemblyConfigurationAttribute>false</GenerateAssemblyConfigurationAttribute>
-    <GenerateAssemblyCompanyAttribute>false</GenerateAssemblyCompanyAttribute>
-    <GenerateAssemblyProductAttribute>false</GenerateAssemblyProductAttribute>
-    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
-  </PropertyGroup>
+		<Title>ArgSentry</Title>
+		<Description>ArgSentry is a utility class for validating method argument values.</Description>
+		<Summary>ArgSentry is a utility class for validating method argument values.</Summary>
+		<AssemblyTitle>ArgSentry</AssemblyTitle>
+		<AssemblyName>ArgSentry</AssemblyName>
+		<Authors>Eric S. Davis</Authors>
+		<Copyright>2022 Eric S. Davis</Copyright>
 
-  <ItemGroup>
-    <None Include="images\icon.png" Pack="true" PackagePath="\" />
-  </ItemGroup>
+		<PackageId>ArgSentry</PackageId>
+		<PackageTags>arg;sentry;prevent;argument;parameter;validation</PackageTags>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+		<PackageIcon>icon.png</PackageIcon>
+
+		<PackageLicenseExpression>MIT</PackageLicenseExpression>
+		
+		<RepositoryType>git</RepositoryType>
+		<RepositoryUrl>https://github.com/eric-davis/ArgSentry.git</RepositoryUrl>
+
+		<GenerateAssemblyConfigurationAttribute>false</GenerateAssemblyConfigurationAttribute>
+		<GenerateAssemblyCompanyAttribute>false</GenerateAssemblyCompanyAttribute>
+		<GenerateAssemblyProductAttribute>false</GenerateAssemblyProductAttribute>
+		<GeneratePackageOnBuild>false</GeneratePackageOnBuild>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<None Include="images\icon.png" Pack="true" PackagePath="\" />
+		<None Include="..\..\README.md" Pack="true" PackagePath="\" />
+	</ItemGroup>
 
 </Project>
