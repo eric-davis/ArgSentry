@@ -7,17 +7,17 @@ namespace ArgSentry.Test;
 
 [TestClass]
 [ExcludeFromCodeCoverage]
-public class EmptyGuidTests
+public class NullGuidTests
 {
     [TestMethod]
-    public void EmptyGuid_WhenValueIsEmpty_ShouldThrow()
+    public void NullGuid_WhenValueIsNull_ShouldThrow()
     {
         // Arrange
-        var obj = Guid.Empty;
-        var expectedMessage = $"Value cannot be empty. (Parameter '{nameof(obj)}')";
+        Guid? obj = null;
+        var expectedMessage = $"Value cannot be null. (Parameter '{nameof(obj)}')";
 
         // Act
-        Action act = () => Prevent.EmptyGuid(obj, nameof(obj));
+        Action act = () => Prevent.NullGuid(obj, nameof(obj));
 
         //Assert
         act.Should().Throw<ArgumentException>()
@@ -26,26 +26,26 @@ public class EmptyGuidTests
     }
 
     [TestMethod]
-    public void EmptyGuid_WhenValueIsValid_ShouldNotThrow()
+    public void NullGuid_WhenValueIsValid_ShouldNotThrow()
     {
         // Arrange
         var obj = Guid.Parse("18413dc6-df4b-4631-a4aa-146ad22c0319");
 
         // Act
-        Action act = () => Prevent.EmptyGuid(obj, nameof(obj));
+        Action act = () => Prevent.NullGuid(obj, nameof(obj));
 
         //Assert
         act.Should().NotThrow();
     }
 
     [TestMethod]
-    public void EmptyGuid_WhenValueIsNull_ShouldNotThrow()
+    public void NullGuid_WhenValueIsEmpty_ShouldNotThrow()
     {
         // Arrange
-        Guid? obj = null;
+        var obj = Guid.Empty;
 
         // Act
-        Action act = () => Prevent.EmptyGuid(obj, nameof(obj));
+        Action act = () => Prevent.NullGuid(obj, nameof(obj));
 
         //Assert
         act.Should().NotThrow();
