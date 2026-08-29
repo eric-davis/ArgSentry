@@ -1,0 +1,45 @@
+name: CI
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  build-test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # MinVer needs full history and tags
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: |
+            8.0.x
+
+      - name: Restore
+        run: dotnet restore ArgSentry.sln
+
+      - name: Build
+        run: dotnet build ArgSentry.sln --configuration Release --no-restore
+
+      - name: Test with coverage
+        run: >
+          dotnet test test/ArgSentry.Test/ArgSentry.Test.csproj
+          --configuration Release --no-build
+          /p:CollectCoverage=true /p:CoverletOutputFormat=opencover
+          /p:CoverletOutput=./coverage/
+
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v4
+        with:
+          files: test/ArgSentry.Test/coverage/coverage.opencover.xml
+          fail_ci_if_error: false
+          token: ${{ secrets.CODECOV_TOKEN }}

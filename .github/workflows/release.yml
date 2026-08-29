@@ -1,0 +1,50 @@
+name: Release
+
+on:
+  push:
+    branches: [main]
+    tags: ['v*.*.*']
+
+permissions:
+  contents: write # needed to create GitHub Releases on tag pushes
+
+jobs:
+  pack-publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # MinVer needs full history and tags
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: |
+            8.0.x
+
+      - name: Restore
+        run: dotnet restore ArgSentry.sln
+
+      - name: Build
+        run: dotnet build src/ArgSentry/ArgSentry.csproj --configuration Release --no-restore
+
+      - name: Pack
+        run: >
+          dotnet pack src/ArgSentry/ArgSentry.csproj
+          --configuration Release --no-build
+          --output ./dist
+
+      - name: Push to NuGet
+        run: >
+          dotnet nuget push "./dist/*.nupkg"
+          --api-key ${{ secrets.NUGET_API_KEY }}
+          --source https://api.nuget.org/v3/index.json
+          --skip-duplicate
+
+      - name: Create GitHub Release
+        if: startsWith(github.ref, 'refs/tags/v')
+        uses: softprops/action-gh-release@v2
+        with:
+          generate_release_notes: true
+          files: ./dist/*.nupkg
