@@ -5,7 +5,6 @@ ArgSentry
 ![Nuget](https://img.shields.io/nuget/dt/argsentry)
 
 [![CI](https://github.com/eric-davis/ArgSentry/actions/workflows/ci.yml/badge.svg)](https://github.com/eric-davis/ArgSentry/actions/workflows/ci.yml)
-[![codecov](https://codecov.io/gh/eric-davis/ArgSentry/branch/main/graph/badge.svg)](https://codecov.io/gh/eric-davis/ArgSentry)
 
 ArgSentry is a .NET / .NET Core utility library for validating method argument values.
 

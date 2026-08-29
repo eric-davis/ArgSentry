@@ -29,16 +29,5 @@ jobs:
       - name: Build
         run: dotnet build ArgSentry.sln --configuration Release --no-restore
 
-      - name: Test with coverage
-        run: >
-          dotnet test test/ArgSentry.Test/ArgSentry.Test.csproj
-          --configuration Release --no-build
-          /p:CollectCoverage=true /p:CoverletOutputFormat=opencover
-          /p:CoverletOutput=./coverage/
-
-      - name: Upload coverage to Codecov
-        uses: codecov/codecov-action@v4
-        with:
-          files: test/ArgSentry.Test/coverage/coverage.opencover.xml
-          fail_ci_if_error: false
-          token: ${{ secrets.CODECOV_TOKEN }}
+      - name: Test
+        run: dotnet test test/ArgSentry.Test/ArgSentry.Test.csproj --configuration Release --no-build
