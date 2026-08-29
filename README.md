@@ -4,8 +4,6 @@ ArgSentry
 ![Nuget](https://img.shields.io/nuget/v/argsentry)
 ![Nuget](https://img.shields.io/nuget/dt/argsentry)
 
-[![CI](https://github.com/eric-davis/ArgSentry/actions/workflows/ci.yml/badge.svg)](https://github.com/eric-davis/ArgSentry/actions/workflows/ci.yml)
-
 > **⚠️ Archived — no longer maintained.** Most of what `Prevent` does is now built into
 > .NET itself (`ArgumentNullException.ThrowIfNull`, `ArgumentException.ThrowIfNullOrEmpty`,
 > `ArgumentOutOfRangeException.ThrowIfGreaterThan`, etc., .NET 6/8+). For the rest
