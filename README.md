@@ -6,6 +6,13 @@ ArgSentry
 
 [![CI](https://github.com/eric-davis/ArgSentry/actions/workflows/ci.yml/badge.svg)](https://github.com/eric-davis/ArgSentry/actions/workflows/ci.yml)
 
+> **⚠️ Archived — no longer maintained.** Most of what `Prevent` does is now built into
+> .NET itself (`ArgumentNullException.ThrowIfNull`, `ArgumentException.ThrowIfNullOrEmpty`,
+> `ArgumentOutOfRangeException.ThrowIfGreaterThan`, etc., .NET 6/8+). For the rest
+> (collection/Guid/default-value checks), see [Ardalis.GuardClauses](https://github.com/ardalis/GuardClauses),
+> which is actively maintained. This package will remain on NuGet as-is for existing
+> consumers, but there will be no further updates, bug fixes, or releases.
+
 ArgSentry is a .NET / .NET Core utility library for validating method argument values.
 
 
